@@ -28,8 +28,7 @@ namespace SportsStore.Pages
         {
             get
             {
-                int page;
-                page = int.TryParse(Request.QueryString["page"], out page) ? page : 1;
+                int page = GetPageFromRequest();
                 return page > MaxPage ? MaxPage : page;
             }
         }
@@ -40,6 +39,14 @@ namespace SportsStore.Pages
             {
                 return (int)Math.Ceiling((decimal)_repo.Products.Count() / _pageSize);
             }
+        }
+
+        private int GetPageFromRequest()
+        {
+            int page;
+            // Pull from either route data or fallback to the query string.
+            string requestValue = (string)RouteData.Values["page"] ?? Request.QueryString["page"];
+            return requestValue != null && int.TryParse(requestValue, out page) ? page : 1;
         }
     }
 }
