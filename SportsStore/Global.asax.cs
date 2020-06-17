@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
+﻿using SportsStore.App_Start;
+using System;
+using System.Web.Routing;
 
 namespace SportsStore
 {
@@ -11,6 +8,8 @@ namespace SportsStore
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            // The static Routes property is a RouteCollection instance needed to perform the configuration.
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
 }
