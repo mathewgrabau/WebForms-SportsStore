@@ -1,5 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Store.master.cs" Inherits="SportsStore.Pages.Store" %>
 
+<!-- Tag registration -->
+<%@ Register TagPrefix="siteControls" TagName="CatLinks" Src="~/Controls/CategoryList.ascx" %>
+
 <!DOCTYPE html>
 
 <html>
@@ -14,7 +17,9 @@
         <div id="header">
             <div class="title">SPORTS STORE</div>
         </div>
-        <div id="categories">categories go here</div>
+        <div id="categories">
+            <siteControls:CatLinks runat="server" />
+        </div>
         <div>
             <asp:ContentPlaceHolder ID="bodyContent" runat="server">
             </asp:ContentPlaceHolder>
