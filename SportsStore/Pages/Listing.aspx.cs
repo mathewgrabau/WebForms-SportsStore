@@ -19,7 +19,7 @@ namespace SportsStore.Pages
 
         }
 
-        protected IEnumerable<Product> GetProducts()
+        public IEnumerable<Product> GetProducts()
         {
             return FilterProducts().OrderBy(p=>p.ProductID).Skip((CurrentPage - 1) * _pageSize).Take(_pageSize);
         }
