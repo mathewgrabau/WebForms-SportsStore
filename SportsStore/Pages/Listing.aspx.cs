@@ -4,10 +4,7 @@ using SportsStore.Pages.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Routing;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SportsStore.Pages
 {
@@ -26,8 +23,8 @@ namespace SportsStore.Pages
                     Product selectedProduct = _repo.Products.Where(p => p.ProductID == selectedProductId).FirstOrDefault();
                     if (selectedProduct != null)
                     {
-                        SessionHelper.GetCart(Session).AddItem(selectedProduct, 1);
-                        SessionHelper.Set(Session, SessionKey.RETURN_URL, Request.RawUrl);
+                        Session.GetCart().AddItem(selectedProduct, 1);
+                        Session.Set( SessionKey.RETURN_URL, Request.RawUrl);
 
                         Response.Redirect(RouteTable.Routes.GetVirtualPath(null, "cart", null).VirtualPath);
                     }

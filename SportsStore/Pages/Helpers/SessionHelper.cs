@@ -13,15 +13,14 @@ namespace SportsStore.Pages.Helpers
         RETURN_URL
     }
 
-    // TODO make this an extension method for fun.
     public static class SessionHelper
     {
-        public static void Set(HttpSessionState session, SessionKey key, object value)
+        public static void Set(this HttpSessionState session, SessionKey key, object value)
         {
             session[Enum.GetName(typeof(SessionKey), key)] = value;
         }
 
-        public static T Get<T>(HttpSessionState session, SessionKey key)
+        public static T Get<T>(this HttpSessionState session, SessionKey key)
         {
             object dataValue = session[Enum.GetName(typeof(SessionKey), key)];
             if (dataValue != null && dataValue is T)
@@ -34,7 +33,7 @@ namespace SportsStore.Pages.Helpers
             }
         }
 
-        public static Cart GetCart(HttpSessionState session)
+        public static Cart GetCart(this HttpSessionState session)
         {
             Cart currentCart = Get<Cart>(session, SessionKey.CART);
             if (currentCart == null)

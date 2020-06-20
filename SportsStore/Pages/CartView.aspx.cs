@@ -2,10 +2,6 @@
 using SportsStore.Pages.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SportsStore.Pages
 {
@@ -18,14 +14,14 @@ namespace SportsStore.Pages
 
         public IEnumerable<CartLine> GetCartLines()
         {
-            return SessionHelper.GetCart(Session).Lines;
+            return Session.GetCart().Lines;
         }
 
         public decimal CartTotal
         {
             get
             {
-                return SessionHelper.GetCart(Session).CalculateTotal();
+                return Session.GetCart().CalculateTotal();
             }
         }
 
@@ -33,7 +29,7 @@ namespace SportsStore.Pages
         {
             get
             {
-                return SessionHelper.Get<string>(Session, SessionKey.RETURN_URL);
+                return Session.Get<string>(SessionKey.RETURN_URL);
             }
         }
     }
