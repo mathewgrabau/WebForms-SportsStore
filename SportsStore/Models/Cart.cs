@@ -20,7 +20,7 @@ namespace SportsStore.Models
             }
             else
             {
-                line.Quantity = quantity;
+                line.Quantity += quantity;
             }
         }
 
