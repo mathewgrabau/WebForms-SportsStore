@@ -7,14 +7,15 @@
             <h2>Checkout Now</h2>
             Please enter your details. Your order will be dispatched as soon as possible.
 
-            <div id="errors">
-                <asp:ValidationSummary runat="server" />
+            <div id="errors" data-valmsg-summary="true">
+                <ul><li style="display: none;"></li></ul>
+                <asp:ValidationSummary ID="validationSummary1" runat="server" />
             </div>
 
             <h3>Ship to</h3>
             <div>
                 <label for="name">Name:</label>
-                <input id="name" name="name" />
+                <input id="name" name="name" data-val="true" data-val-required="Enter your name" />
             </div>
 
             <h3>Address</h3>

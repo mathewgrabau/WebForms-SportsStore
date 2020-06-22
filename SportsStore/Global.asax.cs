@@ -1,5 +1,6 @@
 ﻿using SportsStore.App_Start;
 using System;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace SportsStore
@@ -10,6 +11,7 @@ namespace SportsStore
         {
             // The static Routes property is a RouteCollection instance needed to perform the configuration.
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
