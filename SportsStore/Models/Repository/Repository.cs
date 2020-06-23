@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -47,6 +48,11 @@ namespace SportsStore.Models.Repository
             }
 
             _context.SaveChanges();
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            throw new NotImplementedException();
         }
     }
 }
