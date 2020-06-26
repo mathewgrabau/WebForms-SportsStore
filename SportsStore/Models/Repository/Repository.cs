@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 
@@ -50,9 +52,41 @@ namespace SportsStore.Models.Repository
             _context.SaveChanges();
         }
 
+        public void SaveProduct(Product product)
+        {
+            if (product.ProductID == 0)
+            {
+                product = _context.Products.Add(product);
+            }
+            else
+            {
+                Product productRecord = _context.Products.Find(product.ProductID);
+                if (productRecord != null)
+                {
+                    productRecord.Name = product.Name;
+                    productRecord.Description = product.Description;
+                    productRecord.Price = product.Price;
+                    productRecord.Category = product.Category;
+                }
+            }
+
+            _context.SaveChanges();
+        }
+
         public void DeleteProduct(Product product)
         {
-            throw new NotImplementedException();
+            // TODO I don't like this implementation! Better to archive so it doesn't
+            // impact the records in the system.
+            IEnumerable<Order> orders = _context.Orders.Include(o => o.OrderLines.Select(ol => ol.Product))
+                .Where(o => o.OrderLines.Count(ol => ol.Product.ProductID == product.ProductID) > 0).ToArray();
+
+            foreach (Order order in orders)
+            {
+                _context.Orders.Remove(order);
+            }
+
+            _context.Products.Remove(product);
+            _context.SaveChanges();
         }
     }
 }

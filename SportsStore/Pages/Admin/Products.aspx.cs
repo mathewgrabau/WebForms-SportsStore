@@ -3,9 +3,7 @@ using SportsStore.Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.ModelBinding;
 
 namespace SportsStore.Pages.Admin
 {
@@ -23,14 +21,31 @@ namespace SportsStore.Pages.Admin
             return _repository.Products;
         }
 
+        public void UpdateProduct(int productID)
+        {
+            Product product = _repository.Products.Where(p => p.ProductID == productID).FirstOrDefault();
+            if (product != null && TryUpdateModel(product, new FormValueProvider(ModelBindingExecutionContext)))
+            {
+                _repository.SaveProduct(product);
+            }
+        }
+
         public void DeleteProduct(int productId)
         {
             Product product = _repository.Products.Where(p => p.ProductID == productId).FirstOrDefault();
             if (product != null)
             {
-                _repository.DeleteProduct();
+                _repository.DeleteProduct(product);
             }
         }
 
+        public void InsertProduct()
+        {
+            Product p = new Product();
+            if (TryUpdateModel(p, new FormValueProvider(ModelBindingExecutionContext)))
+            {
+                _repository.SaveProduct(p);
+            }
+        }
     }
 }

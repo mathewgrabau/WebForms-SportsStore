@@ -23,7 +23,7 @@ namespace SportsStore.Pages.Admin
             }
         }
 
-        public string ProductssUrl
+        public string ProductsUrl
         {
             get
             {

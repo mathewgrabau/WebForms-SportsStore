@@ -12,8 +12,8 @@
             <asp:Repeater runat="server" SelectMethod="GetOrders" ItemType="SportsStore.Models.Order">
                 <ItemTemplate>
                     <tr>
-                        <td><%: Item.Name %></td>
-                        <td><%: Item.City %></td>
+                        <td><%#: Item.Name %></td>
+                        <td><%#: Item.City %></td>
                         <td><%# Item.OrderLines.Sum(ol=>ol.Quantity) %></td>
                         <td><%# Total(Item.OrderLines).ToString("C") %></td>
                         <td>
